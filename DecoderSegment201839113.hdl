@@ -1,27 +1,29 @@
-CHIP DecoderSegment201839113 {
-   IN A,B,C,D;
-   OUT c;
-   
-   PARTS:
-   And(a=A, b=B, out=AB);
-   
-   //
-   And(a=A, b=C, out=AC);
-   
-   //
-   Not(in=D, out=notD);
-   And(a=C, b=notD, out=CnotD);
-   
-   //  Ā·B̄·C̄·D̄
-   Not(in=A, out=notA);
-   Not(in=B, out=notB);
-   Not(in=C, out=notC);
-   And(a=notA, b=notB, out=notAB);
-   And(a=notAB, b=notC, out=notABC);
-   And(a=notABC, b=notD, out=notABCD);
-   
-   // 
-   Or(a=AB, b=AC, out=term1);
-   Or(a=CnotD, b=notABCD, out=term2);
-   Or(a=term1, b=term2, out=c);
+CHIP DecoderSegmentC<your student number> {
+    IN A,B,C,D;
+    OUT c;
+    
+    PARTS:
+    Not(in=B, out=notB);
+    Not(in=C, out=notC);
+    Not(in=D, out=notD);
+    
+    // Term 1: CD'
+    And(a=C, b=notD, out=CnotD);
+    
+    // Term 2: B'C'D'
+    And(a=notB, b=notC, out=notBnotC);
+    And(a=notBnotC, b=notD, out=notBnotCnotD);
+    
+    // Term 3: ABC
+    And(a=A, b=B, out=AB);
+    And(a=AB, b=C, out=ABC);
+    
+    // Term 4: ABC'D'
+    And(a=AB, b=notC, out=ABnotC);
+    And(a=ABnotC, b=notD, out=ABnotCnotD);
+    
+    // Combine all terms
+    Or(a=CnotD, b=notBnotCnotD, out=term1);
+    Or(a=term1, b=ABC, out=term2);
+    Or(a=term2, b=ABnotCnotD, out=c);
 }
