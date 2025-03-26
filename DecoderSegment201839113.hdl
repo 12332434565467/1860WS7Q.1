@@ -1,4 +1,4 @@
-CHIP DecoderSegmentC<your student number> {
+CHIP DecoderSegment201839113 {
     IN A,B,C,D;
     OUT c;
     
