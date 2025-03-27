@@ -1,18 +1,19 @@
 CHIP DecoderSegment201839113 {
-IN A, B, C, D;
-OUT c;
-PARTS:
-// Inverters
-Not(in=B, out=nB);
-Not(in=C, out=nC);
-Not(in=D, out=nD);
-// Product terms
-And3(in=nB, in2=nC, in3=nD, out=term1); // ~B & ~C & ~D
-And(in=A, in2=B, out=term2); // A & B
-And(in=A, in2=C, out=term3); // A & C
-And(in=C, in2=nD, out=term4); // C & ~D
-// OR chain
-Or(in=term1, in2=term2, out=or1);
-Or(in=term3, in2=term4, out=or2);
-Or(in=or1, in2=or2, out=c);
+    IN A, B, C, D;
+    OUT c;
+    
+    PARTS:
+    // Inverters
+    Not(in=B, out=nB);
+    Not(in=C, out=nC);
+    Not(in=D, out=nD);
+    // Product terms
+    And3(in=nB, in2=nC, in3=nD, out=term1); // ~B & ~C & ~D
+    And(in=A, in2=B, out=term2); // A & B
+    And(in=A, in2=C, out=term3); // A & C
+    And(in=C, in2=nD, out=term4); // C & ~D
+    // OR chain
+    Or(in=term1, in2=term2, out=or1);
+    Or(in=term3, in2=term4, out=or2);
+    Or(in=or1, in2=or2, out=c);
 }
