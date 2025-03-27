@@ -2,7 +2,7 @@
      IN A , B , C , D ;
      OUT c ;
  
-     PARTS :
+     PARTS:
      // Inverters
      Not ( in =B , out = notB ) ;
      Not ( in =A , out = notA ) ;
